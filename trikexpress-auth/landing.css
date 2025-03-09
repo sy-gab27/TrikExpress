@@ -1,0 +1,105 @@
+/* ✅ General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* ✅ Navbar */
+.navbar {
+    background: rgba(30, 60, 114, 0.9);
+    padding: 10px 20px;
+}
+
+.navbar-nav .nav-link {
+    color: white;
+    transition: 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #56ccf2; /* Light blue hover effect */
+}
+
+/* ✅ Driver Button - Smaller & Positioned After Contact */
+.driver-btn {
+    font-size: 12px; /* Made smaller */
+    padding: 5px 8px;
+    background: #28a745; /* Green color */
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 5px;
+    transition: 0.3s;
+}
+
+.driver-btn:hover {
+    background: #218838; /* Darker green on hover */
+}
+
+/* ✅ Branding (Replaces "TrikExpress" Text) */
+.branding {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ✅ Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background: url('images/trike.png') center/cover no-repeat, linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    padding: 20px;
+    text-align: center;
+}
+
+/* ✅ About Section */
+.about-section {
+    background: url('images/about-bg.png') center/cover no-repeat, linear-gradient(135deg, #2a5298, #1e3c72);
+    padding: 80px 20px;
+    text-align: center;
+}
+
+/* ✅ Features Section */
+.features {
+    padding: 80px 20px;
+    background: url('images/features-bg.png') center/cover no-repeat, linear-gradient(135deg, #1e3c72, #56ccf2);
+    text-align: center;
+}
+
+.feature-box {
+    display: inline-block;
+    width: 30%;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    margin: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.feature-box:hover {
+    transform: scale(1.05);
+}
+
+/* ✅ Contact Section */
+.contact {
+    padding: 80px 20px;
+    background: url('images/contact-bg.png') center/cover no-repeat, linear-gradient(135deg, #1e3c72, #c0392b);
+    text-align: center;
+}
+
+/* ✅ Footer */
+footer {
+    background: #1e3c72;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}

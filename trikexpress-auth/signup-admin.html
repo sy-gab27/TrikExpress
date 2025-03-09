@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Signup | TrikExpress</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+
+    <!-- ✅ Branding -->
+    <div class="branding"><i class="fas fa-motorcycle"></i> TrikExpress</div>
+
+    <!-- ✅ Back Button -->
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+
+    <div class="signup-container">
+        <form action="register.php" method="POST">
+            <h2>Create Admin Account</h2>
+            <input type="hidden" name="role" value="admin">
+            <input type="text" name="fullname" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="tel" name="phone_number" placeholder="Phone Number" required>
+            
+            <button type="submit">Sign Up</button>
+            <p>Already have an account? <a href="login-admin.html">Login</a></p>
+        </form>
+    </div>
+
+</body>
+</html>

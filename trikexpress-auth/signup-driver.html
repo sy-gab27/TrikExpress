@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Signup | TrikExpress</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+
+    <!-- ✅ Branding (Now on Left) -->
+    <div class="branding"><i class="fas fa-motorcycle"></i> TrikExpress</div>
+
+    <!-- ✅ Back Button (Now Below Branding) -->
+    <a href="admin_dashboard.php" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+
+    <div class="signup-container">
+        <form action="register.php" method="POST">
+            <h2>Create Driver Account</h2>
+            <input type="hidden" name="role" value="driver">
+            <input type="text" name="fullname" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="tel" name="phone_number" placeholder="Phone Number" required>
+            <input type="text" name="id_number" placeholder="Driver ID Number" required>
+            
+            <p>Upload PSA & Valid ID for Verification:</p>
+            <input type="file" name="psa_doc" required>
+            <input type="file" name="valid_id" required>
+
+            <!-- ✅ Terms & Conditions Checkbox -->
+            <div class="form-check">
+                <input type="checkbox" id="termsCheck" required>
+                <label for="termsCheck">
+                    I agree to the <a href="#" id="openTerms">Terms & Conditions</a>
+                </label>
+            </div>
+            
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <!-- ✅ Terms & Conditions Modal -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Terms & Conditions</h3>
+            <p>By signing up, you agree to follow the rules of TrikExpress...</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("openTerms").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("termsModal").style.display = "block";
+        });
+
+        document.querySelector(".close").addEventListener("click", function () {
+            document.getElementById("termsModal").style.display = "none";
+        });
+
+        window.onclick = function (event) {
+            if (event.target === document.getElementById("termsModal")) {
+                document.getElementById("termsModal").style.display = "none";
+            }
+        };
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+/* ✅ General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url('images/trike.png') center/cover no-repeat;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* ✅ TrikExpress Branding (Top-Left) */
+.branding {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ✅ Back Button (Below Branding with Spacing) */
+.back-btn {
+    position: fixed;
+    top: 60px; /* Spaced below branding */
+    left: 20px;
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 6px 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: red;
+    color: white;
+}
+
+/* ✅ Login Form Container */
+.login-container {
+    max-width: 380px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+/* ✅ Input Fields */
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    color: black;
+    font-size: 14px;
+}
+
+/* ✅ Placeholder Text Color */
+.login-container input::placeholder {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+/* ✅ Submit Button */
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #56ccf2, #2f80ed);
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #2f80ed, #56ccf2);
+    transform: scale(1.05);
+}
+
+/* ✅ Sign-up Link */
+.login-container p a {
+    color: #56ccf2;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-container p a:hover {
+    text-decoration: underline;
+}

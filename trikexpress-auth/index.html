@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrikExpress</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="landing.css">
+</head>
+<body data-bs-spy="scroll" data-bs-target=".navbar">
+
+    <!-- ✅ Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+
+            <!-- ✅ Branding (Now on Left) -->
+<div class="branding"><i class="fas fa-motorcycle"></i> TrikExpress</div>
+
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                     <!-- ✅ Driver Signup Button (Now After "Contact" & Smaller) -->
+                <li class="nav-item">
+                    <a href="login-driver.html" class="btn btn-success btn-sm driver-btn ms-2">Driver Sign-Up</a>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ✅ Hero Section -->
+    <section id="home" class="hero">
+        <div class="container text-center">
+            <h1>Welcome to <span class="text-primary">TrikExpress</span></h1>
+            <p><i class="fas fa-motorcycle"></i> Fast, Safe, and Affordable Tricycle Rides</p>
+            <a href="login-user.html" class="btn btn-primary btn-lg mt-3"><i class="fas fa-arrow-right"></i> Get Started</a>
+        </div>
+    </section>
+
+    <!-- ✅ About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="text-center">About TrikExpress</h2>
+            <p class="text-center">TrikExpress provides a fast and secure way to book tricycle rides.</p>
+        </div>
+    </section>
+
+    <!-- ✅ Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="text-center">Why Choose TrikExpress?</h2>
+            <div class="row">
+                <div class="col-md-4 feature-box">
+                    <i class="fas fa-bolt fa-2x"></i>
+                    <h3>Easy Booking</h3>
+                    <p>Book a ride in just a few taps.</p>
+                </div>
+                <div class="col-md-4 feature-box">
+                    <i class="fas fa-shield-alt fa-2x"></i>
+                    <h3>Verified Drivers</h3>
+                    <p>All drivers go through a strict verification process.</p>
+                </div>
+                <div class="col-md-4 feature-box">
+                    <i class="fas fa-coins fa-2x"></i>
+                    <h3>Affordable Fares</h3>
+                    <p>No hidden charges, just fair pricing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ✅ Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container text-center">
+            <h2>Contact Us <i class="fas fa-phone"></i></h2>
+            <p>Email: support@trikexpress.com | Phone: +63 900 123 4567</p>
+        </div>
+    </section>
+
+    <!-- ✅ Footer -->
+    <footer>
+        <p>&copy; 2025 TrikExpress. All Rights Reserved.</p>
+    </footer>
+
+    <!-- ✅ Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
