@@ -1,8 +1,8 @@
 <?php
-$host = "localhost"; // Change to your actual database host if needed
-$user = "root";      // Change to your actual database username
-$pass = "";          // Change to your actual database password
-$db = "trikexpress"; // Your database name
+$host = "localhost"; 
+$user = "root";      
+$pass = "";          
+$db = "trikexpress"; 
 
 // Create connection
 $conn = new mysqli($host, $user, $pass, $db);

@@ -1,0 +1,257 @@
+    /* ✅ General Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/trike.png') center/cover no-repeat;
+        color: white;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* ✅ Navbar */
+    .navbar {
+        background: rgba(30, 60, 114, 0.9) !important;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        height: 70px;
+    }
+
+    /* ✅ Navbar Branding */
+    .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: white;
+    }
+
+    .navbar-brand i {
+        margin-right: 5px;
+        color: white;
+    }
+
+    /* ✅ Sidebar */
+    .sidebar {
+        width: 250px;
+        height: 100vh;
+        background: linear-gradient(180deg, #1e3c72, #2a5298);
+        position: fixed;
+        top: 0;
+        left: -250px; /* Initially hidden */
+        transition: left 0.3s ease-in-out;
+        padding-top: 60px;
+        z-index: 1000;
+        padding-bottom: 20px;
+    }
+
+    .sidebar.active {
+        left: 0; /* Sidebar visible when active */
+    }
+
+    .sidebar .branding {
+        color: white;
+        font-size: 1.5rem;
+        padding: 20px;
+        text-align: center;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .sidebar-links {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .square-btn {
+        display: flex;
+        align-items: center;
+        color: white;
+        background: rgba(255, 255, 255, 0.2);
+        text-decoration: none;
+        font-size: 16px;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        text-align: left;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    .square-btn i {
+        margin-right: 8px;
+    }
+
+    .square-btn:hover {
+        background: rgba(255, 255, 255, 0.4);
+        transform: scale(1.05);
+    }
+
+    .square-btn.active {
+        background: rgba(255, 255, 255, 0.6);
+        transform: scale(1.05);
+    }
+
+    .logout-btn {
+        display: flex;
+        align-items: center;
+        color: white;
+        background: rgba(255, 255, 255, 0.2);
+        text-decoration: none;
+        font-size: 16px;
+        padding: 12px;
+        border-radius: 8px;
+        text-align: left;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    .logout-btn i {
+        margin-right: 8px;
+    }
+
+    .logout-btn:hover {
+        background: rgba(255, 255, 255, 0.4);
+        transform: scale(1.05);
+    }
+
+   /* ✅ Sidebar Menu Toggle (Burger Menu) */
+.burger-menu {
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    display: flex; /* Always visible */
+    justify-content: flex-start;
+}
+
+.burger-menu:hover {
+    color: #56ccf2;
+}
+
+    /* ✅ Main Content Area (Adjust for Navbar Height) */
+    .content {
+        margin-left: 250px; /* Adjusted for Sidebar width */
+        padding: 20px;
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 70px); /* Adjusted for fixed navbar height */
+    }
+
+    /* ✅ Profile Container (Center Form) */
+    .profile-container {
+        width: 100%;
+        max-width: 800px; /* Ensure it takes up a wider space on desktop */
+        padding: 30px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .profile-container form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .profile-pic-container {
+        position: relative;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .profile-pic-container img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .edit-icon {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 50%;
+        padding: 5px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .form-group {
+        margin-bottom: 20px; /* Increased margin for better spacing */
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    /* ✅ Save Button */
+    .btn {
+        margin-top: 20px;
+    }
+
+   /* ✅ Adjust Sidebar for Mobile */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+        left: -200px; /* Initially hidden on mobile */
+    }
+
+    .sidebar.active {
+        left: 0; /* Sidebar visible when active */
+    }
+
+    .content {
+        margin-left: 0;
+        height: auto;
+        padding: 10px;
+    }
+
+    .profile-container {
+        width: 90%;
+        max-width: 400px;
+    }
+}
+
+/* ✅ Responsive Sidebar: Adjust for smaller screens */
+@media (max-width: 480px) {
+    .sidebar {
+        width: 180px;
+    }
+
+    .sidebar .branding {
+        font-size: 1rem;
+    }
+
+    .sidebar-links {
+        padding: 5px;
+    }
+}

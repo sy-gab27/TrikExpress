@@ -1,50 +1,36 @@
 <?php
 session_start();
-include 'db_connect.php'; // Make sure this file is correctly set up for database connections
+include "db_connect.php"; 
 
-if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "users") {
+if (!isset($_SESSION["user_id"]) || !isset($_SESSION["role"])) {
     header("Location: index.html");
     exit();
 }
 
 $userId = $_SESSION["user_id"];
+$role = $_SESSION["role"];
 
-// Fetch user details
-$stmt = $conn->prepare("SELECT full_name, email, phone_number, profile_pic FROM users WHERE user_id = ?");
+// ✅ Set correct table based on role
+$table = ($role === "user") ? "users" : (($role === "driver") ? "drivers" : "admins");
+
+// ✅ Fetch user details
+$stmt = $conn->prepare("SELECT full_name, email, phone_number, profile_pic FROM $table WHERE {$role}_id = ?");
 $stmt->bind_param("i", $userId);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
+$stmt->close();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $fullName = trim($_POST["full_name"]);
-    $email = trim($_POST["email"]);
-    $phone = trim($_POST["phone_number"]);
-
-    // Handle profile picture upload
-    if (!empty($_FILES["profile_pic"]["name"])) {
-        $targetDir = "uploads/";
-        $fileName = basename($_FILES["profile_pic"]["name"]);
-        $targetFilePath = $targetDir . $fileName;
-        move_uploaded_file($_FILES["profile_pic"]["tmp_name"], $targetFilePath);
-
-        // Update with new profile picture
-        $updateStmt = $conn->prepare("UPDATE users SET full_name=?, email=?, phone_number=?, profile_pic=? WHERE user_id=?");
-        $updateStmt->bind_param("ssssi", $fullName, $email, $phone, $targetFilePath, $userId);
-    } else {
-        // Update without changing profile picture
-        $updateStmt = $conn->prepare("UPDATE users SET full_name=?, email=?, phone_number=? WHERE user_id=?");
-        $updateStmt->bind_param("sssi", $fullName, $email, $phone, $userId);
-    }
-
-    if ($updateStmt->execute()) {
-        $_SESSION["full_name"] = $fullName;
-        $_SESSION["email"] = $email;
-        echo "<script>alert('Profile updated successfully!'); window.location.href='profile.php';</script>";
-    } else {
-        echo "<script>alert('Error updating profile.');</script>";
-    }
+// ✅ If user not found, redirect
+if (!$user) {
+    echo "<script>alert('User not found.'); window.location.href = 'index.html';</script>";
+    exit();
 }
+
+// ✅ Set profile picture (default if not set)
+$profilePic = !empty($user["profile_pic"]) ? $user["profile_pic"] : "images/default-profile.png";
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -52,74 +38,94 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrikExpress | Profile</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Profile | TrikExpress</title>
+
+    <!-- ✅ Bootstrap & FontAwesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="profile.css">
 </head>
 <body>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
+<!-- ✅ Navbar -->
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
         <div class="burger-menu" onclick="toggleSidebar()">☰</div>
-        <div class="sidebar-links">
-            <h2>TrikExpress</h2>
-            <a href="user_dashboard.php">Dashboard</a>
-            <a href="profile.php" class="active">Profile</a>
-            <a href="logout.php" class="logout-btn">Logout</a>
-        </div>
+        <a class="navbar-brand mx-auto"><i class="fas fa-motorcycle"></i> TrikExpress</a>
     </div>
+</nav>
 
-    <!-- Profile Content -->
-    <div class="content">
-        <h2>User Profile</h2>
-        <div class="profile-container">
-            <form method="post" enctype="multipart/form-data">
-                <div class="profile-pic-container">
-                    <img id="profileImage" src="<?php echo !empty($user['profile_pic']) ? $user['profile_pic'] : 'default-profile.png'; ?>" alt="Profile Picture">
-                    <label for="profile_pic" class="edit-icon">📷</label>
-                    <input type="file" id="profile_pic" name="profile_pic" accept="image/*" onchange="previewImage(event)">
-                </div>
-
-                <div class="input-group">
-                    <label>Full Name:</label>
-                    <input type="text" name="full_name" value="<?php echo htmlspecialchars($user["full_name"]); ?>" required>
-                </div>
-                <div class="input-group">
-                    <label>Email:</label>
-                    <input type="email" name="email" value="<?php echo htmlspecialchars($user["email"]); ?>" required>
-                </div>
-                <div class="input-group">
-                    <label>Phone Number:</label>
-                    <input type="text" name="phone_number" value="<?php echo htmlspecialchars($user["phone_number"]); ?>" required>
-                </div>
-
-                <button type="submit" class="btn save-btn">Save Changes</button>
-            </form>
-        </div>
+<!-- ✅ Sidebar -->
+<div class="sidebar">
+    <div class="branding">
+        <i class="fas fa-motorcycle"></i> TrikExpress
     </div>
+    <div class="sidebar-links">
+        <a href="<?php echo $role; ?>_dashboard.php" class="square-btn"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="profile.php" class="square-btn active"><i class="fas fa-user"></i> Profile</a>
+        <a href="logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+</div>
 
-    <script>
+<!-- ✅ Profile Content -->
+<div class="content d-flex flex-column align-items-center">
+    <h2 class="mb-4 text-white">Profile Details</h2>
+
+    <div class="profile-container">
+        <form action="update_profile.php" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="role" value="<?php echo $role; ?>">
+
+            <!-- ✅ Profile Picture Upload -->
+            <div class="profile-pic-container">
+                <label for="profile_pic">
+                    <img id="profileImage" src="<?php echo $profilePic; ?>" alt="Profile Picture">
+                    <div class="edit-icon"><i class="fas fa-camera"></i></div>
+                </label>
+                <input type="file" id="profile_pic" name="profile_pic" accept="image/*" onchange="previewImage(event)">
+            </div>
+            <?php if ($role !== "admin") { ?>
+                <button type="submit" class="btn btn-primary w-100 mt-3">Upload Picture</button>
+            <?php } ?>
+
+            <!-- ✅ User Details -->
+            <div class="form-group mt-3">
+                <label>Full Name:</label>
+                <input type="text" class="form-control" value="<?php echo htmlspecialchars($user['full_name']); ?>" disabled>
+            </div>
+            <div class="form-group mt-3">
+                <label>Email:</label>
+                <input type="email" class="form-control" value="<?php echo htmlspecialchars($user['email']); ?>" disabled>
+            </div>
+            <div class="form-group mt-3">
+                <label>Phone Number:</label>
+                <input type="text" name="phone_number" class="form-control" value="<?php echo htmlspecialchars($user['phone_number']); ?>" <?php echo ($role === "admin") ? "disabled" : ""; ?>>
+            </div>
+
+            <!-- ✅ Save Button -->
+            <?php if ($role !== "admin") { ?>
+                <button type="submit" class="btn btn-success w-100 mt-3">Save Changes</button>
+            <?php } ?>
+        </form>
+    </div>
+</div>
+
+<!-- ✅ JavaScript for Sidebar Toggle -->
+<script>
+ function toggleSidebar() {
+            const sidebar = document.querySelector(".sidebar");
+            sidebar.classList.toggle("active");
+        }
+
         function previewImage(event) {
             const reader = new FileReader();
-            reader.onload = function () {
-                const img = document.getElementById("profileImage");
-                img.src = reader.result;
+            reader.onload = function() {
+                const output = document.getElementById('profileImage');
+                output.src = reader.result;
             };
             reader.readAsDataURL(event.target.files[0]);
         }
-
-        function toggleSidebar() {
-            let sidebar = document.querySelector(".sidebar");
-            let content = document.querySelector(".content");
-
-            if (sidebar.style.left === "0px") {
-                sidebar.style.left = "-250px";
-                content.style.marginLeft = "0";
-            } else {
-                sidebar.style.left = "0px";
-                content.style.marginLeft = "250px";
-            }
-        }
-    </script>
+</script>
 
 </body>
 </html>

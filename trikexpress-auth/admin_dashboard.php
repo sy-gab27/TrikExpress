@@ -1,11 +1,14 @@
 <?php
 session_start();
-include 'db_connect.php';
 
-if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admins") {
+// 🔹 Ensure session remains active even after a refresh
+if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
     header("Location: index.html");
     exit();
 }
+
+// 🔹 Prevent session loss on refresh
+session_regenerate_id(true);
 ?>
 
 <!DOCTYPE html>
@@ -22,8 +25,20 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admins") {
 </head>
 <body>
 
-    <!-- ✅ Small Transparent Burger Button -->
-    <div class="burger-menu" onclick="toggleSidebar()">☰</div>
+    <!-- ✅ Navbar (No Logout Button) -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+            
+            <!-- ✅ Burger Menu (Left Side) -->
+            <div class="burger-menu" onclick="toggleSidebar()">☰</div>
+
+            <!-- ✅ Branding (Centered) -->
+            <a class="navbar-brand mx-auto" href="#">
+                <i class="fas fa-motorcycle"></i> TrikExpress Admin
+            </a>
+
+        </div>
+    </nav>
 
     <!-- ✅ Sidebar -->
     <div class="sidebar">
@@ -37,17 +52,17 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admins") {
         <a href="logout.php" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 
-    <!-- ✅ Main Content -->
+    <!-- ✅ Main Content (Fixed Navbar Overlap) -->
     <div class="content">
         <h2 class="text-center">Welcome, Admin!</h2>
         <p class="text-center">Manage your system efficiently.</p>
-<!-- ✅ Admin Options (Square Buttons) -->
-<div class="admin-options">
-    <a href="drivers_list.php" class="option-btn"><i class="fas fa-user-tie"></i> Manage Drivers</a>
-    <a href="users_list.php" class="option-btn"><i class="fas fa-users"></i> Manage Users</a>
-    <a href="signup-driver.html" class="option-btn"><i class="fas fa-id-card"></i> Register Driver</a>
-</div>
 
+        <!-- ✅ Admin Options (Square Buttons) -->
+        <div class="admin-options">
+            <a href="drivers_list.php" class="option-btn"><i class="fas fa-user-tie"></i> Manage Drivers</a>
+            <a href="users_list.php" class="option-btn"><i class="fas fa-users"></i> Manage Users</a>
+            <a href="signup-driver.html" class="option-btn"><i class="fas fa-id-card"></i> Register Driver</a>
+        </div>
     </div>
 
     <!-- ✅ Bootstrap & JS -->

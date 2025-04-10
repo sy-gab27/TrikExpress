@@ -3,30 +3,55 @@ body {
     font-family: 'Poppins', sans-serif;
     background: url('images/trike.png') center/cover no-repeat;
     color: white;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    margin: 0;
 }
 
-/* ✅ TrikExpress Branding (Top-Left) */
-.branding {
+/* ✅ Navbar */
+.navbar {
+    background: rgba(30, 60, 114, 0.9);
+    padding: 10px 20px;
     position: fixed;
-    top: 20px;
-    left: 20px;
-    font-size: 18px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* ✅ Branding */
+.navbar-brand {
+    font-size: 1.5rem;
     font-weight: bold;
-    color: white;
     display: flex;
     align-items: center;
     gap: 8px;
+    color: white;
 }
 
-/* ✅ Back Button (Below Branding with Spacing) */
+.navbar-brand i {
+    margin-right: 5px;
+    color: white;
+}
+
+/* ✅ Navbar Links */
+.navbar-nav .nav-link {
+    color: white;
+    transition: 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #56ccf2;
+}
+
+/* ✅ Back Button */
 .back-btn {
     position: fixed;
-    top: 60px; /* Spaced below branding */
+    top: 70px;
     left: 20px;
     color: white;
     font-size: 14px;
@@ -42,15 +67,17 @@ body {
     color: white;
 }
 
-/* ✅ Login Form Container */
+/* ✅ Center Login Wrapper */
 .login-container {
     max-width: 380px;
+    width: 100%;
     background: rgba(255, 255, 255, 0.2);
     padding: 25px;
     border-radius: 12px;
     text-align: center;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
+    margin-top: 90px; /* Prevents overlap with navbar */
 }
 
 /* ✅ Input Fields */
@@ -65,7 +92,7 @@ body {
     font-size: 14px;
 }
 
-/* ✅ Placeholder Text Color */
+/* ✅ Placeholder Text */
 .login-container input::placeholder {
     color: rgba(0, 0, 0, 0.7);
 }
@@ -88,13 +115,12 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* ✅ Sign-up Link */
-.login-container p a {
-    color: #56ccf2;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.login-container p a:hover {
-    text-decoration: underline;
+/* ✅ Responsive Design */
+@media (max-width: 768px) {
+    .back-btn {
+        top: 60px;
+    }
+    .login-container {
+        width: 90%;
+    }
 }

@@ -2,7 +2,7 @@
 session_start();
 include 'db_connect.php';
 
-if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admins") {
+if (!isset($_SESSION["user_id"]) || $_SESSION["role"] !== "admin") {
     header("Location: index.html");
     exit();
 }
@@ -55,11 +55,12 @@ $result = $stmt->get_result();
                         <th>Status</th>
                         <th>PSA Document</th>
                         <th>Valid ID</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php while ($row = $result->fetch_assoc()) { ?>
-                        <tr>
+                        <tr id="driver-<?php echo $row['driver_id']; ?>">
                             <td><?php echo $row["full_name"]; ?></td>
                             <td><?php echo $row["email"]; ?></td>
                             <td><?php echo $row["phone_number"]; ?></td>
@@ -82,6 +83,14 @@ $result = $stmt->get_result();
                                     </a>
                                 <?php } else { echo "Not Provided"; } ?>
                             </td>
+                            <td>
+                                <?php if ($row["status"] === 'pending') { ?>
+                                    <button class="btn btn-success btn-sm" onclick="approveDriver(<?php echo $row['driver_id']; ?>)">Approve</button>
+                                    <button class="btn btn-danger btn-sm" onclick="denyDriver(<?php echo $row['driver_id']; ?>)">Deny</button>
+                                <?php } else { ?>
+                                    <span class="badge bg-success">Approved</span>
+                                <?php } ?>
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -92,10 +101,47 @@ $result = $stmt->get_result();
     <!-- ✅ Bootstrap & JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
         function toggleSidebar() {
             document.querySelector(".sidebar").classList.toggle("active");
             document.querySelector(".content").classList.toggle("shift");
+        }
+
+        function approveDriver(driverId) {
+            if (!confirm("Are you sure you want to approve this driver?")) return;
+
+            fetch("approve_driver.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "driver_id=" + driverId
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                if (data.status === "success") {
+                    location.reload();
+                }
+            })
+            .catch(error => console.error("Error approving driver:", error));
+        }
+
+        function denyDriver(driverId) {
+            if (!confirm("Are you sure you want to deny this driver?")) return;
+
+            fetch("deny_driver.php", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "driver_id=" + driverId
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                if (data.status === "success") {
+                    location.reload();
+                }
+            })
+            .catch(error => console.error("Error denying driver:", error));
         }
     </script>
 

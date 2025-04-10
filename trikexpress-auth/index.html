@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrikExpress</title>
+
+    <!-- Bootstrap & Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="landing.css">
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar">
@@ -13,10 +17,8 @@
     <!-- ✅ Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-
-            <!-- ✅ Branding (Now on Left) -->
-<div class="branding"><i class="fas fa-motorcycle"></i> TrikExpress</div>
-
+            <!-- ✅ Branding -->
+            <a class="navbar-brand branding" href="#"><i class="fas fa-motorcycle"></i> TrikExpress</a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -28,11 +30,10 @@
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                     <!-- ✅ Driver Signup Button (Now After "Contact" & Smaller) -->
-                <li class="nav-item">
-                    <a href="login-driver.html" class="btn btn-success btn-sm driver-btn ms-2">Driver Sign-Up</a>
                 </ul>
+                <a href="login-driver.html" class="btn btn-success btn-sm driver-btn ms-3">Driver Sign-Up</a>
             </div>
+            
         </div>
     </nav>
 
@@ -41,37 +42,45 @@
         <div class="container text-center">
             <h1>Welcome to <span class="text-primary">TrikExpress</span></h1>
             <p><i class="fas fa-motorcycle"></i> Fast, Safe, and Affordable Tricycle Rides</p>
-            <a href="login-user.html" class="btn btn-primary btn-lg mt-3"><i class="fas fa-arrow-right"></i> Get Started</a>
+            <a href="login-user.html" class="btn btn-primary btn-lg mt-3">
+                <i class="fas fa-arrow-right"></i> Get Started
+            </a>
         </div>
     </section>
 
     <!-- ✅ About Section -->
     <section id="about" class="about-section">
-        <div class="container">
-            <h2 class="text-center">About TrikExpress</h2>
-            <p class="text-center">TrikExpress provides a fast and secure way to book tricycle rides.</p>
+        <div class="container text-center">
+            <h2>About TrikExpress</h2>
+            <p>TrikExpress provides a fast and secure way to book tricycle rides.</p>
         </div>
     </section>
 
     <!-- ✅ Features Section -->
     <section id="features" class="features">
-        <div class="container">
-            <h2 class="text-center">Why Choose TrikExpress?</h2>
-            <div class="row">
-                <div class="col-md-4 feature-box">
-                    <i class="fas fa-bolt fa-2x"></i>
-                    <h3>Easy Booking</h3>
-                    <p>Book a ride in just a few taps.</p>
+        <div class="container text-center">
+            <h2>Why Choose TrikExpress?</h2>
+            <div class="row justify-content-center g-4">
+                <div class="col-md-4">
+                    <div class="feature-box">
+                        <i class="fas fa-bolt fa-2x"></i>
+                        <h3>Easy Booking</h3>
+                        <p>Book a ride in just a few taps with our user-friendly app.</p>
+                    </div>
                 </div>
-                <div class="col-md-4 feature-box">
-                    <i class="fas fa-shield-alt fa-2x"></i>
-                    <h3>Verified Drivers</h3>
-                    <p>All drivers go through a strict verification process.</p>
+                <div class="col-md-4">
+                    <div class="feature-box">
+                        <i class="fas fa-shield-alt fa-2x"></i>
+                        <h3>Verified Drivers</h3>
+                        <p>Every driver is verified and undergoes strict screening for safety.</p>
+                    </div>
                 </div>
-                <div class="col-md-4 feature-box">
-                    <i class="fas fa-coins fa-2x"></i>
-                    <h3>Affordable Fares</h3>
-                    <p>No hidden charges, just fair pricing.</p>
+                <div class="col-md-4">
+                    <div class="feature-box">
+                        <i class="fas fa-coins fa-2x"></i>
+                        <h3>Affordable Fares</h3>
+                        <p>No hidden charges! Enjoy fair and budget-friendly pricing.</p>
+                    </div>
                 </div>
             </div>
         </div>
