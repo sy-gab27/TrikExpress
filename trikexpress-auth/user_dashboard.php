@@ -334,24 +334,24 @@ function fetchPendingRides() {
             let tableBody = document.getElementById("pending-rides-body");
             tableBody.innerHTML = ""; // Clear previous rows
 
-            if (data.length > 0) {
+            if (data) {
                 document.getElementById("pending-ride-message").style.display = "none";
                 document.getElementById("pending-ride-table").style.display = "table";
 
-                data.forEach(ride => {
+                // data.forEach(ride => {
                     let row = document.createElement("tr");
 
                     row.innerHTML = `
-                        <td>${ride.pickup || "N/A"}</td>
-                        <td>${ride.destination || "N/A"}</td>
-                        <td>₱${(parseFloat(ride.fare) || 0).toFixed(2)}</td>
+                        <td>${data.pickup || "N/A"}</td>
+                        <td>${data.destination || "N/A"}</td>
+                        <td>₱${(parseFloat(data.fare) || 0).toFixed(2)}</td>
                         <td>
-                            <button onclick="cancelRide(${ride.ride_id})" class="cancel-ride-btn">Cancel</button>
+                            <button onclick="cancelRide(${data.ride_id})" class="cancel-ride-btn">Cancel</button>
                         </td>
                     `;
 
                     tableBody.appendChild(row);
-                });
+                // });
 
                 document.getElementById("ride-status-bar").style.display = "block";
                 document.getElementById("ride-status").innerText = "🚕 You have pending rides";
